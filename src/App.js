@@ -5,6 +5,7 @@ import Todo from "./Todo";
 export const ACTIONS = {
   ADD_TODO: "add_todo",
   TOGGLE_TODO: "toggle_todo",
+  DELETE_TODO: "delete_todo",
 };
 
 const reducer = (todos, action) => {
@@ -18,6 +19,8 @@ const reducer = (todos, action) => {
         }
         return todo;
       });
+    case ACTIONS.DELETE_TODO:
+      return todos.filter((todo) => todo.id !== action.payload.todoId);
     default:
       return todos;
   }
