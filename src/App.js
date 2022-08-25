@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import "./App.css";
 
+const reducer = (state, action) => {};
+
 const App = () => {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
   const [count, setCount] = useState(0);
 
   function increment() {
