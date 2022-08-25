@@ -1,8 +1,20 @@
 import { useState, useReducer } from "react";
 import "./App.css";
 
+const ACTION_TYPES = {
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+};
+
 const reducer = (state, action) => {
-  return { count: state.count + 1 };
+  switch (action.type) {
+    case ACTION_TYPES.INCREMENT:
+      return { count: state.count + 1 };
+    case ACTION_TYPES.DECREMENT:
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
 };
 
 const App = () => {
@@ -10,15 +22,13 @@ const App = () => {
   // "state" will be updated
   // reducer function returns the updated state
   const [state, dispatch] = useReducer(reducer, { count: 0 });
-  // const [count, setCount] = useState(0);
 
   function increment() {
-    // setCount(count + 1);
-    dispatch();
+    dispatch({ type: ACTION_TYPES.INCREMENT });
   }
 
   function decrement() {
-    // setCount(count - 1);
+    dispatch({ type: ACTION_TYPES.DECREMENT });
   }
   return (
     <div className="App">
