@@ -2,7 +2,7 @@ import { useReducer, useState } from "react";
 import "./App.css";
 import Todo from "./Todo";
 
-const ACTIONS = {
+export const ACTIONS = {
   ADD_TODO: "add_todo",
   TOGGLE_TODO: "toggle_todo",
 };
@@ -12,7 +12,12 @@ const reducer = (todos, action) => {
     case ACTIONS.ADD_TODO:
       return [...todos, newTodo(action.payload.name)];
     case ACTIONS.TOGGLE_TODO:
-
+      return todos.map((todo) => {
+        if (todo.id === action.payload.todoId) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      });
     default:
       return todos;
   }
@@ -42,7 +47,7 @@ const App = () => {
         />
       </form>
       {todos.map((todo, index) => {
-        return <Todo key={index} todo={todo} />;
+        return <Todo key={index} todo={todo} dispatch={dispatch} />;
       })}
     </>
   );
